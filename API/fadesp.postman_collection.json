@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "7518eba2-fa3f-4467-bfb7-c638c2306484",
+		"name": "fadesp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30381209"
+	},
+	"item": [
+		{
+			"name": "all books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/v1/Books",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "just one id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an object with specific properties\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('object').that.includes.all.keys('id', 'title', 'description', 'pageCount', 'excerpt', 'publishDate');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/v1/Books/1",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  if (pm.response.to.have.status(200)){",
+							"    console.log(\"teste ok \");",
+							"  }",
+							"    else (pm.response.to.have.status(400));",
+							"    console.log(\"error. One or more validation errors occurred.\")",
+							"});",
+							"",
+							"pm.test(\"Content-Type header is present\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.response.to.have.header(\"Date\");",
+							"  pm.response.to.have.header(\"Server\");",
+							"  pm.response.to.have.header(\"Transfer-Encoding\");",
+							"  pm.response.to.have.header(\"api-supported-versions\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"test book\",\r\n  \"description\": \"hjfohnfhnoufhjn \",\r\n  \"pageCount\": 2912,\r\n  \"excerpt\": \"Dolore stet qui odio et et invidunt ut. Gubergren diam vulputate dolore et eros erat consequat dolor stet erat ea ipsum ut iusto lorem tempor. Elitr nonumy duo eirmod veniam et vero sed erat kasd erat lorem vel et rebum duo gubergren. Justo sea vulputate diam suscipit ea dolore sit aliquyam soluta stet duis dolor diam. Takimata ad sit erat dolore augue et. Eleifend ipsum consectetuer erat vel consequat sea. Labore takimata ipsum erat ut sit est et ipsum ipsum labore diam diam diam. Rebum facilisi sed ut at ex possim et facilisis. Facilisis sed eirmod eos clita dolore consetetur est ipsum sed diam praesent gubergren eros et sea aliquyam vel. Sed consetetur consetetur eos stet. Ea dignissim dolor dolore minim stet voluptua justo diam tincidunt vel et elitr sed et. Et eirmod commodo erat sit dolor justo vel dolores. Sit at praesent sea dolore dolores voluptua amet. Aliquyam voluptua et iusto molestie sanctus rebum consectetuer lorem lorem elitr esse nisl invidunt labore.\\nNulla ex sea dolores dolor takimata et elitr duo wisi ipsum et doming eros sed tincidunt.\",\r\n  \"publishDate\": \"2024-02-02T20:00:31.396Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/v1/Books",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Books"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
