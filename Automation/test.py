@@ -1,12 +1,10 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
-import chromedriver_binary  # Adds chromedriver binary to path
 
 service = Service()
 options = webdriver.ChromeOptions()
@@ -39,7 +37,9 @@ try:
     input_phone = driver.find_element(By.XPATH, "//*[@id='basicBootstrapForm']/div[4]/div/input")
     input_phone.send_keys("9180090000")
 
+    #preencher gênero 
     input_gender = driver.find_element(By.XPATH, "//*[@id='basicBootstrapForm']/div[5]/div/label[1]/input").click()
+    #preencher hobbies
     input_hobbies = driver.find_element(By.ID, "checkbox2").click()
     
     #selecionar a lingua 
@@ -72,23 +72,20 @@ try:
     select.select_by_value("9")
 
     password = "123456789"
-
+    #preencher senha
     input_first_password = driver.find_element(By.ID, "firstpassword")
     input_first_password.send_keys(password)
-
+    #preencher senha pela segunda vez
     input_second_password = driver.find_element(By.ID, "secondpassword")
     input_second_password.send_keys(password)
 
+    #clicar no botão de submeter
     submit_button = driver.find_element(By.ID, "submitbtn").click()
-    # Espera até que um elemento específico seja carregado na página (aqui usando um ID como exemplo)
+    # Espera até que um elemento específico seja carregado na página (mensagem que não pode ser encontrada, mas usando id como exemplo)
     element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "ContolID-1"))
+        EC.presence_of_element_located((By.ID, "mensagem"))
     )
 
-    # Submetendo o formulário
-    # input_element.submit()
-
-    # Você pode adicionar mais ações conforme necessário...
 
 finally:
     # Certificando-se de fechar o navegador, mesmo se ocorrer uma exceção
